@@ -1,0 +1,37 @@
+##########################
+ ########   How to Build  #########
+ 
+ ##########################
+   
+   
+
+Prepare the cross compilation for the kernel. please follow up below points. 
+    
+      (a) Get Toolchain from Codesourcery site. (http://www.codesourcery.com)
+
+          ex) Download : https://sourcery.mentor.com/sgpp/lite/arm/portal/subscription?@template=lite
+    
+           recommand - Feature : ARM
+                    Target OS : "EABI"
+                    package : "IA32 GNU/Linux TAR"
+
+      (b) Edit Makefile for compile.
+
+            edit "CROSS_COMPILE" to right toolchain path which you downloaded.
+
+            ex) ARCH  ?= arm
+              CROSS_COMPILE ?= ../toolchains/arm-2010.01/bin/arm-none-eabi-   //You have to modify this path!
+
+      (c) Compile as follow commands.
+
+            $ cd kernel
+            $ make clean
+            $ make mrproper
+            $ make msm8660_celox_usa_att_rev02_defconfig
+            $ make
+
+
+     (d) Get the zImage on follow path.
+
+          kernel/arch/arm/boot/zImage
+          you can download it via opensource.samsung.com
