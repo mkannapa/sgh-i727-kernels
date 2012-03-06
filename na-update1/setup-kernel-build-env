@@ -1,0 +1,17 @@
+##
+# NOTE: Source this file before building the kernel
+##
+
+##
+#  Using Android NDK cross compile: please see installation
+##
+CROSS_COMPILE=/opt/android/android-ndk/android-ndk-r7b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-
+ARCH=arm
+
+export CROSS_COMPILE
+export ARCH
+
+
+##
+#  Using default toolchain SOURCERY (already embedded in makefile)
+##

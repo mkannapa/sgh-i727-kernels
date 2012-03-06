@@ -1,0 +1,4 @@
+set -x
+echo "Unsetting Build Env..."
+unset ARCH
+unser CROSS_COMPILE
