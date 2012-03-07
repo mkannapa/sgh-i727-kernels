@@ -1,4 +1,5 @@
 *~
+scripts/kconfig/mconf
 .config
 .config.bak
 .version
