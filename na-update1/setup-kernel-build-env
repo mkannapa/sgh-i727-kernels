@@ -6,6 +6,7 @@ set -x
 #  Using Android NDK cross compile: please see installation
 ##
 CROSS_COMPILE=/opt/android/android-ndk/android-ndk-r7b/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-
+#CROSS_COMPILE=/opt/toolchains/sourcery/mohankr/arm-2010q1/bin/arm-none-eabi-
 ARCH=arm
 
 export CROSS_COMPILE
