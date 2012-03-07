@@ -1,7 +1,7 @@
 ##
 # NOTE: Source this file before building the kernel
 ##
-
+set -x
 ##
 #  Using Android NDK cross compile: please see installation
 ##
@@ -11,7 +11,12 @@ ARCH=arm
 export CROSS_COMPILE
 export ARCH
 
-
+set +x
 ##
 #  Using default toolchain SOURCERY (already embedded in makefile)
 ##
+# make clean
+# make mrproper
+# make att_sgh_i727_rev02_defconfig 
+# Then do any customizations
+# make menuconfig

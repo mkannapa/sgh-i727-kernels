@@ -62,23 +62,44 @@ UTS_TRUNCATE="cut -b -$UTS_LEN"
   echo \#define UTS_MACHINE \"$ARCH\"
 
   echo \#define UTS_VERSION \"`echo $UTS_VERSION | $UTS_TRUNCATE`\"
-
   echo \#define LINUX_COMPILE_TIME \"`date +%T`\"
-  echo \#define LINUX_COMPILE_BY \"`whoami`\"
-  echo \#define LINUX_COMPILE_HOST \"`hostname | $UTS_TRUNCATE`\"
-
-  domain=`dnsdomainname 2> /dev/null`
-  if [ -z "$domain" ]; then
-    domain=`domainname 2> /dev/null`
-  fi
-
-  if [ -n "$domain" ]; then
-    echo \#define LINUX_COMPILE_DOMAIN \"`echo $domain | $UTS_TRUNCATE`\"
+  if [ -e linux-compile-by ]
+  then
+    echo \#define LINUX_COMPILE_BY \"`cat linux-compile-by`\"
   else
-    echo \#define LINUX_COMPILE_DOMAIN
+    echo \#define LINUX_COMPILE_BY \"`whoami`\"
   fi
 
-  echo \#define LINUX_COMPILER \"`$CC -v 2>&1 | tail -n 1`\"
+  if [ -e linux-compile-host ]
+  then
+    echo \#define LINUX_COMPILE_HOST \"`cat linux-compile-host`\"
+  else
+    echo \#define LINUX_COMPILE_HOST \"`hostname | $UTS_TRUNCATE`\"
+  fi
+
+  if [ -e linux-compile-domain ]
+  then
+    echo \#define LINUX_COMPILE_DOMAIN \"`cat linux-compile-domain`\"
+  else
+    domain=`dnsdomainname 2> /dev/null`
+    if [ -z "$domain" ]; then
+      domain=`domainname 2> /dev/null`
+    fi
+
+    if [ -n "$domain" ]; then
+      echo \#define LINUX_COMPILE_DOMAIN \"`echo $domain | $UTS_TRUNCATE`\"
+    else
+      echo \#define LINUX_COMPILE_DOMAIN
+    fi
+  fi
+  
+  if [ -e linux-compiler ]
+  then
+    echo \#define LINUX_COMPILER \"`$CC -v 2>&1 | tail -n 1|sed 's/^\(gcc version.*\).(.*/\1/'`\"
+  else
+    echo \#define LINUX_COMPILER \"`$CC -v 2>&1 | tail -n 1`\"
+  fi
+
 ) > .tmpcompile
 
 # Only replace the real compile.h if the new one is different,
